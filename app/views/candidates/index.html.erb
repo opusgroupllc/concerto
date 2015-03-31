@@ -1,10 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Candidates</h1>
+<h1>Current Candidates | <%= @candidates.count %></h1>
 
-<table>
+<div class="table-responsive">
+<table class="table table-striped">
   <thead>
     <tr>
+      <th>Stage</th>
       <th>First name</th>
       <th>Last name</th>
       <th>Phone number</th>
@@ -16,10 +18,11 @@
   <tbody>
     <% @candidates.each do |candidate| %>
       <tr>
-        <td><%= candidate.first_name %></td>
+        <td><%= link_to 'Stage', '#' %></td>
+        <td><%= link_to candidate.first_name, candidate %></td>
         <td><%= candidate.last_name %></td>
         <td><%= candidate.phone_number %></td>
-        <td><%= candidate.github_url %></td>
+        <td><%= link_to candidate.github_url, candidate.github_url %></td>
         <td><%= link_to 'Show', candidate %></td>
         <td><%= link_to 'Edit', edit_candidate_path(candidate) %></td>
         <td><%= link_to 'Destroy', candidate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -27,7 +30,7 @@
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
 
 <%= link_to 'New Candidate', new_candidate_path %>
