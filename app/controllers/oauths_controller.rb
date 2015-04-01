@@ -19,19 +19,25 @@ class OauthsController < ApplicationController
     else
       begin
         @user = create_from(provider)
-        # NOTE: this is the place to add '@user.activate!' if you are using user_activation submodule
+
+
+        unless @user.email.split('@').last ==   'opusgroupllc.com'
+          @user.delete
+          raise "Must have a @OpusGroupLLC.com domain"
+        end
 
         reset_session # protect from session fixation attack
         auto_login(@user)
         redirect_to candidates_path, :notice => "Logged in from #{provider.titleize}!"
-      rescue
-        redirect_to root_path, :alert => "Failed to login from #{provider.titleize}!"
+      rescue Exception => e
+        redirect_to root_path, :alert => "Failed to login from #{provider.titleize}! #{e.message}"
       end
     end
   end
 
   def destroy
     logout
+    reset_session
     redirect_to(root_path, notice: 'Logged out!')
   end
 
