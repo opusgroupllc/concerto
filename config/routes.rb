@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  resources :documents
+  resources :stages
+  get 'pages/dashboard'
+
+  get 'pages/terms-of-use'
+
+  get 'pages/contact'
+
+  get 'pages/documentation'
+
+  get 'pages/about'
+
   resources :candidates
 
   root 'candidates#index'
