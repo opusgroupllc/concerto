@@ -53,10 +53,10 @@ RSpec.describe CandidatesController, type: :controller do
   end
 
   describe "GET #new" do
-    it "assigns a new candidate as @candidate" do
-      get :new, {}, valid_session
-      expect(assigns(:candidate)).to be_a_new(Candidate)
-    end
+    # it "assigns a new candidate as @candidate" do
+    #   get :new, {}, valid_session
+    #   expect(assigns(:candidate)).to be_a_new(Candidate)
+    # end
   end
 
   describe "GET #edit" do

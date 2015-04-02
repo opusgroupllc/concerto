@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150402143737) do
+=======
+ActiveRecord::Schema.define(version: 20150401142952) do
+>>>>>>> origin/master
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authentications", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.string   "provider",   null: false
+    t.string   "uid",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "candidates", force: :cascade do |t|
     t.string   "first_name"
@@ -28,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150402143737) do
     t.string   "referral"
   end
 
+<<<<<<< HEAD
   create_table "comments", force: :cascade do |t|
     t.string   "commenter"
     t.text     "body"
@@ -73,4 +86,19 @@ ActiveRecord::Schema.define(version: 20150402143737) do
 
   add_foreign_key "comments", "candidates"
   add_foreign_key "positions", "projects"
+=======
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                        null: false
+    t.string   "crypted_password"
+    t.string   "salt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "remember_me_token"
+    t.datetime "remember_me_token_expires_at"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
+
+>>>>>>> origin/master
 end

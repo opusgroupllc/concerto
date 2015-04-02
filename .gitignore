@@ -11,4 +11,9 @@
 /log/*
 !/log/.keep
 /tmp
+<<<<<<< HEAD
 .env
+=======
+
+/.env
+>>>>>>> origin/master
