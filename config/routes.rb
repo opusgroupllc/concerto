@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  resources :positions
+  resources :projects
   resources :documents
-  resources :stages
   get 'pages/dashboard'
 
   get 'pages/terms-of-use'

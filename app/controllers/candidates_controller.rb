@@ -61,6 +61,30 @@ class CandidatesController < ApplicationController
     end
   end
 
+  def advance
+    @candidate.advance!
+    respond_to do |format|
+      format.html { redirect_to @candidate, notice: '#{@candidate.first_name} has been advanced to the #{@candidate.stage} stage.' }
+      format.json { render :show, status: :ok, location: @candidate }
+    end
+  end
+
+  def archive
+     @candidate.archive!
+    respond_to do |format|
+      format.html { redirect_to @candidate, notice: '#{@candidate.first_name}\'s application has been archived.' }
+      format.json { render :show, status: :ok, location: @candidate }
+    end
+  end
+
+  def flag
+    @candidate.flag!
+    respond_to do |format|
+      format.html { redirect_to @candidate, notice: '#{@candidate.first_name} has been flagged as unqualified for the position.' }
+      format.json { render :show, status: :ok, location: @candidate }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_candidate

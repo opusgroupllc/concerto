@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331233911) do
+ActiveRecord::Schema.define(version: 20150402143737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,53 @@ ActiveRecord::Schema.define(version: 20150331233911) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "email"
+    t.string   "stage"
+    t.string   "referral"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string   "commenter"
+    t.text     "body"
+    t.integer  "candidate_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "comments", ["candidate_id"], name: "index_comments_on_candidate_id", using: :btree
+
+  create_table "documents", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "level"
+    t.integer  "project_id"
+  end
+
+  add_index "positions", ["project_id"], name: "index_positions_on_project_id", using: :btree
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.string   "point_of_contact"
+    t.string   "poc_email"
+    t.string   "client"
+    t.string   "location"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "stages", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "comments", "candidates"
+  add_foreign_key "positions", "projects"
 end

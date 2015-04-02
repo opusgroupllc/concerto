@@ -6,6 +6,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Position</th>
       <th>Stage</th>
       <th>First name</th>
       <th>Last name</th>
@@ -18,7 +19,8 @@
   <tbody>
     <% @candidates.each do |candidate| %>
       <tr>
-        <td><%= link_to 'Stage', '#' %></td>
+        <td><%= candidate.position ? candidate.position.title : "Unassigned" %></td>
+        <td><%= link_to candidate.stage %></td>
         <td><%= link_to candidate.first_name, candidate %></td>
         <td><%= candidate.last_name %></td>
         <td><%= candidate.phone_number %></td>
