@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :authentications
 
   has_many :candidate_comments
+  has_many :candidate_judgements
 end

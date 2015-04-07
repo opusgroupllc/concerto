@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407131345) do
+ActiveRecord::Schema.define(version: 20150407143020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,18 @@ ActiveRecord::Schema.define(version: 20150407131345) do
 
   add_index "candidate_comments", ["candidate_id"], name: "index_candidate_comments_on_candidate_id", using: :btree
   add_index "candidate_comments", ["user_id"], name: "index_candidate_comments_on_user_id", using: :btree
+
+  create_table "candidate_judgements", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "candidate_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "state"
+    t.string   "judgement"
+  end
+
+  add_index "candidate_judgements", ["candidate_id"], name: "index_candidate_judgements_on_candidate_id", using: :btree
+  add_index "candidate_judgements", ["user_id"], name: "index_candidate_judgements_on_user_id", using: :btree
 
   create_table "candidates", force: :cascade do |t|
     t.string   "first_name"
@@ -62,4 +74,6 @@ ActiveRecord::Schema.define(version: 20150407131345) do
 
   add_foreign_key "candidate_comments", "candidates"
   add_foreign_key "candidate_comments", "users"
+  add_foreign_key "candidate_judgements", "candidates"
+  add_foreign_key "candidate_judgements", "users"
 end

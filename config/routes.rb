@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :candidates  do
     resources :candidate_comments
+    resources :candidate_judgements
   end
 
   root "oauths#sign_in"

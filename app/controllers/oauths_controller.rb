@@ -13,13 +13,23 @@ class OauthsController < ApplicationController
   end
 
   def callback
+    # mocklogin
+    # reset_session # protect from session fixation attack
+    # @user = User.find_by(email: "test@test.com")
+    # if @user
+    #   auto_login(@user)
+    # else
+    #   @user = User.create(email: "test@test.com")
+    #   auto_login(@user)
+    # end
+    # redirect_to candidates_path, :notice => "Logged in for #{@user.email}!"
+    #
     provider = auth_params[:provider]
     if @user = login_from(provider)
       redirect_to candidates_path, :notice => "Logged in from #{provider.titleize}!"
     else
       begin
         @user = create_from(provider)
-
 
         unless @user.email.split('@').last ==   'opusgroupllc.com'
           @user.delete

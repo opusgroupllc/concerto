@@ -13,9 +13,9 @@ class CandidatesController < ApplicationController
   def show
     # This will all be moved to form actions on update.
     if params[:state]
-      @candidate.aasm_state = params[:state].to_sym
+      @candidate.update_attributes(aasm_state: params[:state].to_sym)
       if params[:state] == "reset"
-        @candidate.aasm_state = :pre_initial_screen
+        @candidate.update_attributes(aasm_state: :pre_initial_screen)
       end
     end
 

@@ -1,0 +1,2 @@
+module CandidateJudgementsHelper
+end

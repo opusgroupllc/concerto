@@ -3,6 +3,7 @@ class Candidate < ActiveRecord::Base
   mount_uploader :resume, ResumeUploader
 
   has_many :candidate_comments
+  has_many :candidate_judgements
 
   aasm do # default column: aasm_state
     state :pre_initial_screen, :initial => true

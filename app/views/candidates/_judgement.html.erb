@@ -1,0 +1,39 @@
+<% @scoped_to_states = @candidate.candidate_judgements.where(state: @candidate.aasm_state) %>
+<% array = [] %>
+<% @scoped_to_states.select(:user_id).uniq.each do |user| %>
+   <% judgement = @scoped_to_states.where(user_id: user.user_id).order("updated_at").last %>
+   <% array << judgement  %>
+<% end %>
+
+<% array.each do |comment| %>
+  <p>
+    <strong>Judger:</strong>
+    <%= comment.user.email %>
+  </p>
+
+  <p>
+    <strong>Judgement:</strong>
+    <%= comment.judgement %>
+  </p>
+  <p>
+    <strong>Last Updated:</strong>
+    <%= comment.updated_at %>
+  </p>
+
+
+<% end %>
+
+<%= form_for([@candidate, @candidate.candidate_judgements.build]) do |f| %>
+
+  <div class="field">
+    <input type="hidden" id="candidate_judgement" name="candidate_judgement[state]" value="<%= @candidate.aasm_state %>" />
+    <input type="hidden" id="candidate_judgement" name="candidate_judgement[user_id]" value="<%= @current_user.id %>" />
+  </div>
+  <div class="field">
+    <%= f.label :judgement %>
+    <%= f.select(:judgement, [["Approve", "Approve"], ["Indifferent", "Indifferent"], ["Reject", "Reject"]]) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
