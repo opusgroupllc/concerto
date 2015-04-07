@@ -17,9 +17,9 @@
   <tbody>
     <% @candidates.each do |candidate| %>
       <tr>
-        <td><%= link_to 'Show', candidate %></td>
-        <td><%= link_to 'Stage', candidate %></td>
-        <td><%= link_to candidate.first_name, candidate %></td>
+        <td><%= link_to 'Details', candidate, class: "btn btn-success btn-xs" %></td>
+        <td><%= candidate.aasm.current_state %></td>
+        <td><%= candidate.first_name %></td>
         <td><%= candidate.last_name %></td>
         <td><%= candidate.phone_number %></td>
         <td><%= link_to candidate.github_url, candidate.github_url %></td>

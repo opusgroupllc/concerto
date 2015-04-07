@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get 'oauths/callback'
 
-  resources :candidates
+  resources :candidates  
 
   root "oauths#sign_in"
   # The priority is based upon order of creation: first created -> highest priority.

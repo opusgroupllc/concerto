@@ -7,9 +7,16 @@ class CandidatesController < ApplicationController
     @candidates = Candidate.all
   end
 
+
   # GET /candidates/1
   # GET /candidates/1.json
   def show
+    if params[:status]
+      @candidate.aasm_state = params[:status].to_sym
+      if params[:status] == "reset"
+        @candidate.aasm_state = :pre_initial_screen
+      end
+    end
   end
 
   # GET /candidates/new
