@@ -11,12 +11,14 @@ class CandidatesController < ApplicationController
   # GET /candidates/1
   # GET /candidates/1.json
   def show
-    if params[:status]
-      @candidate.aasm_state = params[:status].to_sym
-      if params[:status] == "reset"
+    # This will all be moved to form actions on update.
+    if params[:state]
+      @candidate.aasm_state = params[:state].to_sym
+      if params[:state] == "reset"
         @candidate.aasm_state = :pre_initial_screen
       end
     end
+
   end
 
   # GET /candidates/new

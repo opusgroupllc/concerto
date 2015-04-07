@@ -4,10 +4,10 @@
 
   </div>
   <div class="col-sm-6">
-    <% @candidate.aasm.states(:permitted => true).map(&:name).each do |status| %>
-      <%= link_to status, candidate_path(id: @candidate.id, status: status ), class: "btn btn-default" %>
+    <% @candidate.aasm.states(:permitted => true).map(&:name).each do |state| %>
+      <%= link_to state, candidate_path(id: @candidate.id, state: state ), class: "btn btn-default" %>
     <% end %>
-    <%= link_to "reset", candidate_path(id: @candidate.id, status: "reset" ), class: "btn btn-default" %>
+    <%= link_to "reset", candidate_path(id: @candidate.id, state: "reset" ), class: "btn btn-default" %>
 
   </div>
 </div>
@@ -38,41 +38,12 @@
       <strong>Github url:</strong>
       <%= link_to "Download Resume", @candidate.resume.url %>
     </p>
+    <%= link_to 'Edit', edit_candidate_path(@candidate), class: "btn btn-warning" %> 
+
   </div>
 </div>
 <br><br>
-<%= form_for(@candidate) do |f| %>
-  <% if @candidate.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@candidate.errors.count, "error") %> prohibited this candidate from being saved:</h2>
 
-      <ul>
-      <% @candidate.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <% if @candidate.aasm.current_state == :pre_initial_screen %>
-    <%= render "form_pre_initial_screen" %>
-  <% elsif @candidate.aasm.current_state == :initial_screen %>
-    <%= render "form_initial_screen" %>
-  <% elsif @candidate.aasm.current_state == :pre_phone_screen %>
-    <%= render "form_pre_phone_screen" %>
-  <% elsif @candidate.aasm.current_state == :phone_screen %>
-    <%= render "form_phone_screen" %>
-  <% elsif @candidate.aasm.current_state == :pre_inperson_interview %>
-    <%= render "form_pre_inperson_interview" %>
-  <% elsif @candidate.aasm.current_state == :inperson_interview %>
-    <%= render "form_inperson_interview" %>
-  <% elsif @candidate.aasm.current_state == :viable_candidate %>
-    <%= render "form_viable_candidate" %>
-  <% elsif @candidate.aasm.current_state == :rejected %>
-    <%= render "form_rejected" %>
-  <% end %>
-<% end %>
+<%= render "candidates/states/#{@candidate.aasm_state.to_s}" %>
 
 <br><br>
-<%= link_to 'Edit', edit_candidate_path(@candidate) %> |
-<%= link_to 'Back', candidates_path %>

@@ -2,6 +2,8 @@ class Candidate < ActiveRecord::Base
   include AASM
   mount_uploader :resume, ResumeUploader
 
+  has_many :candidate_comments
+
   aasm do # default column: aasm_state
     state :pre_initial_screen, :initial => true
     state :initial_screen
@@ -10,6 +12,8 @@ class Candidate < ActiveRecord::Base
     state :pre_inperson_interview
     state :inperson_interview
     state :viable_candidate
+    state :offer_rejected
+    state :offer_accepted
     state :rejected
 
     #  Solicit Feedback
@@ -42,8 +46,20 @@ class Candidate < ActiveRecord::Base
       transitions :from => :inperson_interview, :to => :viable_candidate
     end
 
+    # InPerson Complete, Offer Accepted
+    event :candiate_offer_accepted do
+      transitions :from => :viable_candidate, :to => :offer_accepted
+    end
+
+    event :candiate_offer_rejected do
+      transitions :from => :viable_candidate, :to => [:offer_rejected, :offer_accepted]
+    end
+
+
+
+
     event :reject do
-      transitions :from => [:pre_initial_screen, :initial_screen, :post_initial_screen, :pre_phone_screen, :phone_screen, :post_phone_screen, :pre_inperson_interview, :inperson_interview, :viable_candidate], :to => :rejected
+      transitions :from => [:pre_initial_screen, :initial_screen, :pre_phone_screen, :phone_screen, :pre_inperson_interview, :inperson_interview, :viable_candidate, :offer_accepted, :offer_rejected], :to => :rejected
     end
   end
 end

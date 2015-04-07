@@ -28,3 +28,5 @@ gem 'sorcery'
 gem 'rails_12factor', group: :production
 gem 'carrierwave'
 gem 'aasm'
+
+gem 'haml-rails'

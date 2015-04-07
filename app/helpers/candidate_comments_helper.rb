@@ -1,0 +1,2 @@
+module CandidateCommentsHelper
+end

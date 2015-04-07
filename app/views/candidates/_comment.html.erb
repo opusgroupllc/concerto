@@ -1,0 +1,31 @@
+<% @candidate.candidate_comments.where(state: @candidate.aasm_state).each do |comment| %>
+  <p>
+    <strong>State:</strong>
+    <%= comment.state %>
+  </p>
+
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+
+  <p>
+    <strong>Commented By:</strong>
+    <%= comment.user.email %>
+  </p>
+<% end %>
+
+<%= form_for([@candidate, @candidate.candidate_comments.build]) do |f| %>
+
+  <div class="field">
+    <input type="hidden" id="candidate_comment" name="candidate_comment[state]" value="<%= @candidate.aasm_state %>" />
+    <input type="hidden" id="candidate_comment" name="candidate_comment[user_id]" value="<%= @current_user.id %>" />
+  </div>
+  <div class="field">
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
