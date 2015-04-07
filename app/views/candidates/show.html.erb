@@ -19,6 +19,10 @@
   <strong>Github url:</strong>
   <%= @candidate.github_url %>
 </p>
+<p>
+  <strong>Github url:</strong>
+  <%= link_to "Download Resume", @candidate.resume.url %>
+</p>
 
 <%= link_to 'Edit', edit_candidate_path(@candidate) %> |
 <%= link_to 'Back', candidates_path %>

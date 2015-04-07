@@ -10,11 +10,10 @@
       <a class="navbar-brand" href="#">Opus Concerto</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-left">
+        <li><%= link_to "Candidates", candidates_path %></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to 'Dashboard', '#' %></li>
-        <li><%= link_to 'Setting', '#' %></li>
-        <li><%= link_to 'Profile', '#' %></li>
-        <li><%= link_to 'Help', '#' %></li>
         <li><%= link_to "Logout", :logout, method: :post %></li>
       </ul>
     </div>
