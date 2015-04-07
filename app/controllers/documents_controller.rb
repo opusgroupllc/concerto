@@ -3,9 +3,9 @@ class DocumentsController < ApplicationController
 
   # GET /documents
   # GET /documents.json
-  def index
-    @documents = Document.all
-  end
+  # def index
+  #  @documents = Document.all
+  # end
 
   # GET /documents/1
   # GET /documents/1.json
@@ -14,7 +14,8 @@ class DocumentsController < ApplicationController
 
   # GET /documents/new
   def new
-    @document = Document.new
+    # @document = Document.new
+    @document = @candidates.document.build
   end
 
   # GET /documents/1/edit
@@ -24,8 +25,9 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    @document = Document.new(document_params)
-
+    # @document = Document.new(document_params)
+    @document = @candidate.documents.build(document_params)
+    
     respond_to do |format|
       if @document.save
         format.html { redirect_to @document, notice: 'Document was successfully created.' }

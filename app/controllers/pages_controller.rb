@@ -1,13 +1,13 @@
 class PagesController < ApplicationController
   def dashboard
-    @candidates = Candidate.all
-    @positions = Position.all
-    @projects = Project.all   
+    @candidates = Candidate.all.limit(10)
+    @projects   = Project.all.limit(3)
+    @positions  = Position.all.limit(5)   
     
   end
 
-  def terms-of-use
-  end
+  #def terms-of-use
+  #end
 
   def contact
   end

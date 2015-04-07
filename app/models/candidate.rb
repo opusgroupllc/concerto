@@ -3,9 +3,10 @@ class Candidate < ActiveRecord::Base
   REFERRALS = ['From Recruiter', 'Opus Search', 'Personally Applied', 'Referred by Internal Employee']
   
   # belongs_to :stage 
-  belongs_to :project # through :position
+  has_many :projects, through: :positions
 
   has_one :position
+  has_many :documents
 
   validates :first_name, :last_name, presence: true 
   validates :referral, inclusion: { in: REFERRALS }

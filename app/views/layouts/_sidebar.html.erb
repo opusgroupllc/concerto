@@ -1,11 +1,11 @@
 <ul class="nav nav-sidebar">  
   <!-- General -->
   <ul class="nav nav-sidebar">
-    <li class="active"><%= link_to 'OVERVIEW', '#' %></li>
-    <li><%= link_to 'Stages', '/stages' %></li>
-    <li><%= link_to 'Candidates', '/candidates' %></li>
-    <li><%= link_to 'Positions', '/positions' %></li>
-    <li><%= link_to 'Projects', '/projects' %></li>
+    <li class="active"><%= link_to 'DASHBOARD', '/dashboard' %></li>
+    <li><%= link_to 'Stages', '#' %></li>
+    <li><%= link_to 'Candidates', candidates_path %></li>
+    <li><%= link_to 'Positions', positions_path %></li>
+    <li><%= link_to 'Projects', projects_path %></li>
   </ul>	
   <!-- Tools -->
   <ul class="nav nav-sidebar">
@@ -18,10 +18,9 @@
   <!-- Settings -->
   <ul class="nav nav-sidebar">
     <li class="active"><%= link_to 'SETTINGS', '#' %></li>
-    <li><%= link_to 'Profile', '#' %></li>
-    <li><%= link_to 'Messages', '#' %></li>
-    <li><%= link_to 'Lorem', '#' %></li>
-    <li><%= link_to 'Sign out', '#' %></li>
+    <li><%= link_to 'Tasks', '#' %></li>
+    <li><%= link_to 'Comments', '#' %></li>
+    <li><%= link_to 'Logout', :logout, method: :post %></li>
   </ul>	
 </ul>
 

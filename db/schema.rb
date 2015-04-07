@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150402143737) do
-=======
-ActiveRecord::Schema.define(version: 20150401142952) do
->>>>>>> origin/master
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +36,6 @@ ActiveRecord::Schema.define(version: 20150401142952) do
     t.string   "referral"
   end
 
-<<<<<<< HEAD
   create_table "comments", force: :cascade do |t|
     t.string   "commenter"
     t.text     "body"
@@ -84,9 +79,6 @@ ActiveRecord::Schema.define(version: 20150401142952) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "comments", "candidates"
-  add_foreign_key "positions", "projects"
-=======
   create_table "users", force: :cascade do |t|
     t.string   "email",                        null: false
     t.string   "crypted_password"
@@ -100,5 +92,6 @@ ActiveRecord::Schema.define(version: 20150401142952) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
 
->>>>>>> origin/master
+  add_foreign_key "comments", "candidates"
+  add_foreign_key "positions", "projects"
 end

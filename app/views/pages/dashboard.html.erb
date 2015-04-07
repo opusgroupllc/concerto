@@ -1,2 +1,100 @@
-<h1>Pages#dashboard</h1>
-<p>Find me in app/views/pages/dashboard.html.erb</p>
+<!-- Projects -->
+<div>
+  <h2>
+    <%= link_to Project.count, projects_path %> 
+    <%= link_to 'Projects', projects_path %>
+  </h2>
+  <hr/>
+  <div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Point of contact</th>
+      <th>Poc email</th>
+      <th>Client</th>
+      <th>Location</th>
+      <th>Positions</th>
+      <th>Candidates</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+        <td><%= project.point_of_contact %></td>
+        <td><%= project.poc_email %></td>
+        <td><%= project.client %></td>
+        <td><%= project.location %></td>
+        <td><%= project.position_count %></td>
+        <td><%= Project.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+<!-- Positions -->
+<div>
+  <h2>
+    <%= link_to Project.includes(:positions).size, positions_path %> 
+    <%= link_to 'Positions', positions_path %>
+  </h2>
+  <hr/>
+  <div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+       <th>Title</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @positions.each do |position| %>
+      <tr>
+        <td><% position.title %></td>
+        <td><%= position.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+
+<!-- Candidates -->
+<div>
+  <h2> 
+    <%= link_to Candidate.count, positions_path %> 
+    <%= link_to 'Positions', positions_path %>
+  </h2>
+  <hr/>
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Position</th>
+      <th>Stage</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Phone number</th>
+      <th>Github url</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @candidates.each do |candidate| %>
+      <tr>
+        <td><%= candidate.position ? candidate.position.title : "Unassigned" %></td>
+        <td><%= link_to candidate.stage %></td>
+        <td><%= link_to candidate.first_name, candidate %></td>
+        <td><%= candidate.last_name %></td>
+        <td><%= candidate.phone_number %></td>
+        <td><%= link_to candidate.github_url, candidate.github_url %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
