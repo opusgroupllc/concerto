@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   resources :positions
   resources :projects
   resources :documents
-  root 'pages#dashboard'
-  #get '/dashboard', to: 'pages#dashboard'
+  #root 'pages#dashboard'
+  get '/dashboard', to: 'pages#dashboard'
 
   #get 'pages/terms-of-use'
 
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   resources :candidates
 
-  #root "oauths#sign_in"
+  root "oauths#sign_in"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
